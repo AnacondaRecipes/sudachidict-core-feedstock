@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/S/SudachiDict-core/sudachidict_core-20250825.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0]|upper }}/SudachiDict-core/{{ name.replace( '-', '_' )}}-{{ version }}.tar.gz
   sha256: 2f987c06c225c9fbeb7324705ff86ba635c8e9cf1ae5d4994e5df8f14aed78c6
 
 build:
@@ -30,6 +30,8 @@ test:
     - pip
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+
 
 about:
   home: https://github.com/WorksApplications/SudachiDict
