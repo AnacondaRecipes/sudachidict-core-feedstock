@@ -1,13 +1,13 @@
 {% set name = "sudachidict-core" %}
-{% set version = "20230110" %}
+{% set version = "20250825" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/SudachiDict-core-{{ version }}.tar.gz
-  sha256: 35e3fa212e797d23c2147816febb6a5b870c4fe81fa05ad94ece271f23ea4656
+  url: https://pypi.org/packages/source/{{ name[0]|upper }}/SudachiDict-core/{{ name.replace( '-', '_' )}}-{{ version }}.tar.gz
+  sha256: 2f987c06c225c9fbeb7324705ff86ba635c8e9cf1ae5d4994e5df8f14aed78c6
 
 build:
   number: 0
@@ -30,6 +30,7 @@ test:
     - pip
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
 
 about:
   home: https://github.com/WorksApplications/SudachiDict
